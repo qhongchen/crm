@@ -8,7 +8,7 @@
 # 添加依赖
 npm install
 
-# 开启本地服务器localhost:8088
+# 启动服务，默认是localhost:8080
 npm run dev
 
 # 发布环境
