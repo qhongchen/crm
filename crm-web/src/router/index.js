@@ -8,7 +8,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/main',
       name: 'Main',
       component: Main,
       children:[
@@ -16,7 +16,13 @@ export default new Router({
         path : '',
         // 懒加载
         component : resolve => require(['../components/Hello.vue'],resolve),
-      },
+
+        },
+        {
+          path : 'oppo_list',
+          // 懒加载
+          component : resolve => require(['../pages/sales/OppoList.vue'],resolve),
+        },
       ]
     }
   ]
