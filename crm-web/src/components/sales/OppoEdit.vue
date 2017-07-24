@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button @click="dialogFormVisible = true" size="small">编辑{{ id }}</el-button>
+    <el-button @click="dialogFormVisible = true" size="small">编辑</el-button>
 
     <el-dialog title="销售机会管理 > 修改销售机会" :visible.sync="dialogFormVisible">
       <el-form v-model="oppo">
