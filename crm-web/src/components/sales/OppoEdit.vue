@@ -58,7 +58,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click=" test()">取 消</el-button>
+        <el-button @click=" cancle()">取 消</el-button>
         <el-button type="primary" @click=" save()">确 定</el-button>
       </div>
     </el-dialog>
@@ -100,6 +100,7 @@
         dialogFormVisible: false,
         formLabelWidth: '60px',
         oppo: null,
+        oppo1: null,
       };
     },
     methods: {
@@ -125,11 +126,19 @@
 
         this.dialogFormVisible = false
       },
-      test(){
+      cancle(){
         this.$message('取消编辑');
-        this.$store.state.id = this.id;
-        this.oppo = this.$store.getters.getOppoByid[0]
-
+        this.$http.get('http://localhost:8081/getOppo', {
+          params: {
+            id: this.id
+          }
+        })
+          .then(function (res) {
+            this.oppo = res.data
+          }.bind(this))
+          .catch(function (err) {
+            console.log(err);
+          });
         this.dialogFormVisible = false
       }
     }

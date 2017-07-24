@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <el-col :span="6" :offset="9">
-      <el-form :model="userInfo" :rules="rules2" ref="userInfo" label-position="left" label-width="0px">
+      <el-form :model="userInfo" :rules="rules2"  label-position="left" label-width="0px">
         <h3 class="title">系统登录</h3>
         <el-form-item prop="userName">
           <el-input type="text" v-model="userInfo.userName" auto-complete="off" placeholder="账号"></el-input>
