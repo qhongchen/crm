@@ -18,10 +18,10 @@
       <el-col :span="4" >
         <div id="left" style="">
           <el-menu mode="vertical" router="true">
-            <el-submenu>
+            <el-submenu index="1">
               <template slot="title"><i class="el-icon-message"></i>销售机会管理</template>
-              <el-menu-item route="/main/oppo_list" >销售机会管理</el-menu-item>
-              <el-menu-item route="" >客户开发计划</el-menu-item>
+              <el-menu-item index="1-1" route="/main/oppo_list" >销售机会管理</el-menu-item>
+              <el-menu-item index="1-2" route="/main/oppo" >客户开发计划</el-menu-item>
             </el-submenu>
             <el-submenu index="2">
               <template slot="title"><i class="el-icon-message"></i>客户管理</template>

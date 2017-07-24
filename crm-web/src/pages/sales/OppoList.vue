@@ -17,7 +17,7 @@
     </el-row>
     <el-row>
       <el-col :span="24">
-        <el-table :data="oppoList" height="450" border style="width: 99%">
+        <el-table :data="tableData3" height="450" border style="width: 99%">
           <el-table-column
             prop="salesId"
             label="编号"
@@ -64,12 +64,23 @@
   import oppoadd from "../../components/sales/OppoAdd.vue"
   import oppoedit from "../../components/sales/OppoEdit.vue"
   export default {
-    components: {
-      oppoadd, oppoedit
+    components : {
+      oppoadd,oppoedit
+    },
+    mounted: function () {
+
+      this.$http.post('http://localhost:8081/oppoList')
+        .then(function (res) {
+          this.$store.dispatch('updateOppoList', res.data);
+          console.log(this.$store.state.oppoList);
+        }.bind(this))
+        .catch(function (err) {
+          console.log(err);
+        });
     },
     data() {
       return {
-        oppoList: this.$store.state.oppoList,
+        tableData3: this.$store.state.oppoList,
         clientName: '',
         desc: '',
         person: '',
@@ -77,12 +88,59 @@
     },
     methods: {
       find: function () {
-        alert("查询")
+
+        if(this.clientName.trim() == '')
+          this.clientName = ''
+
+        if(this.desc.trim() == '')
+          this.desc = ''
+
+        if(this.person.trim() == '')
+          this.person = ''
+
+        this.$http.get('http://localhost:8081/searchOppo',{
+          params : {
+            clientName : this.clientName,
+            desc : this.desc,
+            person : this.person
+          }
+        }).then(function (res) {
+          this.$store.dispatch('updateOppoList', res.data);
+        }.bind(this))
 
       },
-      delete: function (index, id) {
-        alert("删除")
+      delete1: function (index, id) {
+        //this.$store.dispatch('deleteOppo', index);
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }).then(() => {
+          this.$http.get('http://localhost:8081/deleteOppo', {
+            params: {
+              id: id,
+              index: index
+            }
+          })
+            .then(function (res) {
+              this.$store.dispatch('deleteOppo', res.data);
+
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+            }.bind(this))
+
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       },
+      test: function () {
+        console.log(this.$store.getters.getOppoByid)
+      }
     }
   }
 </script>
