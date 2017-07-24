@@ -17,7 +17,7 @@
     </el-row>
     <el-row>
       <el-col :span="24">
-        <el-table :data="tableData3" height="450" border style="width: 99%">
+        <el-table :data="oppoList" height="450" border style="width: 99%">
           <el-table-column
             prop="salesId"
             label="编号"
@@ -80,7 +80,7 @@
     },
     data() {
       return {
-        tableData3: this.$store.state.oppoList,
+        oppoList: this.$store.state.oppoList,
         clientName: '',
         desc: '',
         person: '',

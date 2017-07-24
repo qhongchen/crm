@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button @click="dialogFormVisible = true" size="small">编辑</el-button>
+    <el-button @click="dialogFormVisible = true" size="small">编辑{{ id }}</el-button>
 
     <el-dialog title="销售机会管理 > 修改销售机会" :visible.sync="dialogFormVisible">
       <el-form v-model="oppo">
@@ -58,7 +58,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click=" cancle()">取 消</el-button>
+        <el-button @click=" test()">取 消</el-button>
         <el-button type="primary" @click=" save()">确 定</el-button>
       </div>
     </el-dialog>
@@ -66,23 +66,70 @@
 </template>
 
 <script>
+  import ElCol from "element-ui/packages/col/src/col";
+  import ElRow from "element-ui/packages/row/src/row";
+  import ElInput from "../../../node_modules/element-ui/packages/input/src/input";
+  import js from  "../../js/jquery-1.4.4.min"
   export default {
+    components: {
+      ElInput,
+      ElRow,
+      ElCol,
+      js
+    },
     props: {
       id: Number,
+    },
+    mounted: function () {
+
+      this.$http.get('http://localhost:8081/getOppo', {
+        params: {
+          id: this.id
+        }
+      })
+        .then(function (res) {
+          this.oppo = res.data
+        }.bind(this))
+        .catch(function (err) {
+          console.log(err);
+        });
+
     },
     data() {
       return {
         dialogFormVisible: false,
-        oppo: {},
+        formLabelWidth: '60px',
+        oppo: null,
       };
     },
     methods: {
       save() {
 
+        $.ajax({
+          url: 'http://localhost:8081/updateOppo',
+          data: this.oppo,
+          type: "POST",
+          headers: {
+            'Content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (data) {
+
+              this.$store.dispatch('updateOppo', data);
+              this.$message({
+                message:"修改成功",
+                type:"success"
+              });
+
+          }.bind(this)
+        });
+
         this.dialogFormVisible = false
       },
-      cancle(){
+      test(){
         this.$message('取消编辑');
+        this.$store.state.id = this.id;
+        this.oppo = this.$store.getters.getOppoByid[0]
+
         this.dialogFormVisible = false
       }
     }
