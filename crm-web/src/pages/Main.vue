@@ -19,7 +19,7 @@
         <div id="left" style="">
           <el-menu mode="vertical" router="true">
             <el-submenu index="1">
-              <template slot="title"><i class="el-icon-message"></i>销售机会管理</template>
+              <template slot="title"><i class="el-icon-message"></i>营销管理</template>
               <el-menu-item index="1-1" route="/main/oppo_list" >销售机会管理</el-menu-item>
               <el-menu-item index="1-2" route="/main/oppo" >客户开发计划</el-menu-item>
             </el-submenu>

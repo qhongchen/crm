@@ -13,7 +13,7 @@
       <el-col :span="2" align="center">
         <el-button @click="find">查询</el-button>
       </el-col>
-      <oppoadd></oppoadd>
+      <oppo-add></oppo-add>
     </el-row>
     <el-row>
       <el-col :span="24">
@@ -44,12 +44,15 @@
             prop="salesCreateTime"
             label="创建时间">
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作" prop="salesAllocationStatus">
             <template scope="scope">
-              <el-col :span="10">
-                <oppoedit :id="scope.row.salesId"></oppoedit>
+              <el-col :span="8" v-if="!scope.row.salesAllocationStatus">
+                <oppo-allocation :oppo="scope.row" >指派</oppo-allocation>
               </el-col>
-              <el-col :span="10">
+              <el-col :span="8">
+                <oppo-edit :oppo="scope.row"></oppo-edit>
+              </el-col>
+              <el-col :span="8">
                 <el-button size="small" type="danger" @click="delete1(scope.$index,scope.row.salesId)">删除</el-button>
               </el-col>
             </template>
@@ -63,9 +66,14 @@
 <script>
   import oppoadd from "../../components/sales/OppoAdd.vue"
   import oppoedit from "../../components/sales/OppoEdit.vue"
+  import oppoallocation from "../../components/sales/OppoAllocation.vue"
+  import ElButton from "../../../node_modules/element-ui/packages/button/src/button";
   export default {
     components : {
-      oppoadd,oppoedit
+      ElButton,
+      "oppo-add" : oppoadd,
+      "oppo-edit" : oppoedit,
+      "oppo-allocation" : oppoallocation,
     },
     mounted: function () {
 

@@ -3,8 +3,6 @@ import Router from 'vue-router'
 import Login from '../pages/Login.vue'
 import Main from '../pages/Main.vue'
 
-
-
 Vue.use(Router)
 
 export default new Router({
@@ -31,5 +29,6 @@ export default new Router({
         },
       ]
     }
-  ]
+  ],
+
 })

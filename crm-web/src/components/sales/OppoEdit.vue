@@ -7,7 +7,7 @@
         <el-form-item align="center">
           <el-col span="3" offset="2">编号:</el-col>
           <el-col span="6">
-            <el-input auto-complete="off" disabled v-model="oppo.salesId"></el-input>
+            <el-input auto-complete="off"  v-model="oppo.salesId" disabled></el-input>
           </el-col>
           <el-col span="3">机会来源:</el-col>
           <el-col span="6">
@@ -68,24 +68,11 @@
 <script>
   export default {
     props: {
-      id: Number,
-    },
-    mounted: function () {
-
-      sandBox.APIs.oppo.get({
-        params: {
-          id: this.id
-        },
-        success : function (data) {
-          this.oppo = data
-        }.bind(this)
-      })
-
+      oppo : Object,
     },
     data() {
       return {
         dialogFormVisible: false,
-        oppo: null,
       };
     },
     methods: {

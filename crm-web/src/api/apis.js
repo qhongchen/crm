@@ -41,7 +41,13 @@
       login : function (obj) {
         obj.api = "login";
         sb.post(obj);
+      },
+
+      list : function (obj) {
+        obj.api = "/user/getListByPower";
+        sb.get(obj);
       }
+
     }
   }
 }(window.sandBox));
