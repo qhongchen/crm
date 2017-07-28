@@ -19,14 +19,7 @@
 </template>
 
 <script>
-  import ElementUI from 'element-ui'
-  import ElRow from "element-ui/packages/row/src/row";
-  import ElCol from "element-ui/packages/col/src/col";
-  import jq from  "../js/jquery-1.4.4.min"
   export default {
-    components: {
-      ElCol, ElRow, ElementUI, jq
-    },
     data() {
       return {
         logining: false,
@@ -52,14 +45,9 @@
 
         this.logining = true;
 
-        $.ajax({
-          url: 'http://localhost:8081/login',
-          data: this.userInfo,
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/x-www-form-urlencoded'
-          }, success: function (data) {
-
+        sandBox.APIs.user.login({
+          data : require('qs').stringify(this.userInfo),
+          success: function (data) {
               setTimeout(function () {
                 if (data) {
                   this.$message({
@@ -80,8 +68,7 @@
               }.bind(this),500)
 
           }.bind(this)
-
-        });
+        })
       }
     }
   }

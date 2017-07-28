@@ -69,14 +69,12 @@
     },
     mounted: function () {
 
-      this.$http.post('http://localhost:8081/oppoList')
-        .then(function (res) {
-          this.$store.dispatch('updateOppoList', res.data);
+      sandBox.APIs.oppo.list({
+        success : function (data) {
+          this.$store.dispatch('updateOppoList', data);
           console.log(this.$store.state.oppoList);
-        }.bind(this))
-        .catch(function (err) {
-          console.log(err);
-        });
+        }.bind(this)
+      })
     },
     data() {
       return {
@@ -98,15 +96,16 @@
         if(this.person.trim() == '')
           this.person = ''
 
-        this.$http.get('http://localhost:8081/searchOppo',{
+        sandBox.APIs.oppo.search({
           params : {
             clientName : this.clientName,
             desc : this.desc,
             person : this.person
-          }
-        }).then(function (res) {
-          this.$store.dispatch('updateOppoList', res.data);
-        }.bind(this))
+          },
+          success : function (data) {
+            this.$store.dispatch('updateOppoList', data);
+          }.bind(this)
+        })
 
       },
       delete1: function (index, id) {
@@ -116,20 +115,21 @@
           cancelButtonText: '取消',
           type: 'warning',
         }).then(() => {
-          this.$http.get('http://localhost:8081/deleteOppo', {
-            params: {
+
+        sandBox.APIs.oppo.delete({
+          params: {
               id: id,
               index: index
-            }
-          })
-            .then(function (res) {
-              this.$store.dispatch('deleteOppo', res.data);
+          },
+          success :function (data) {
+            this.$store.dispatch('deleteOppo', data);
 
               this.$message({
                 type: 'success',
                 message: '删除成功!'
               });
-            }.bind(this))
+          }.bind(this)
+        })
 
         }).catch(() => {
           this.$message({
@@ -138,9 +138,6 @@
           });
         });
       },
-      test: function () {
-        console.log(this.$store.getters.getOppoByid)
-      }
     }
   }
 </script>

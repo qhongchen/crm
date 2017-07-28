@@ -66,53 +66,33 @@
 </template>
 
 <script>
-  import ElCol from "element-ui/packages/col/src/col";
-  import ElRow from "element-ui/packages/row/src/row";
-  import ElInput from "../../../node_modules/element-ui/packages/input/src/input";
-  import js from  "../../js/jquery-1.4.4.min"
   export default {
-    components: {
-      ElInput,
-      ElRow,
-      ElCol,
-      js
-    },
     props: {
       id: Number,
     },
     mounted: function () {
 
-      this.$http.get('http://localhost:8081/getOppo', {
+      sandBox.APIs.oppo.get({
         params: {
           id: this.id
-        }
+        },
+        success : function (data) {
+          this.oppo = data
+        }.bind(this)
       })
-        .then(function (res) {
-          this.oppo = res.data
-        }.bind(this))
-        .catch(function (err) {
-          console.log(err);
-        });
 
     },
     data() {
       return {
         dialogFormVisible: false,
-        formLabelWidth: '60px',
         oppo: null,
-        oppo1: null,
       };
     },
     methods: {
       save() {
 
-        $.ajax({
-          url: 'http://localhost:8081/updateOppo',
-          data: this.oppo,
-          type: "POST",
-          headers: {
-            'Content-type': 'application/x-www-form-urlencoded'
-          },
+        sandBox.APIs.oppo.updata({
+          data : require('qs').stringify(this.oppo),
           success: function (data) {
 
               this.$store.dispatch('updateOppo', data);
@@ -123,22 +103,20 @@
 
           }.bind(this)
         });
-
         this.dialogFormVisible = false
       },
       cancle(){
+
         this.$message('取消编辑');
-        this.$http.get('http://localhost:8081/getOppo', {
+        sandBox.APIs.oppo.get({
           params: {
             id: this.id
-          }
-        })
-          .then(function (res) {
-            this.oppo = res.data
-          }.bind(this))
-          .catch(function (err) {
-            console.log(err);
-          });
+          },
+          success : function (data) {
+            this.oppo = data
+          }.bind(this)
+        });
+
         this.dialogFormVisible = false
       }
     }

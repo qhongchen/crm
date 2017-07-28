@@ -104,19 +104,16 @@
     methods: {
       save() {
 
-        this.$http.post('http://localhost:8081/addOppo', require('qs').stringify(this.oppo), {
-          headers: {
-            'Content-type': 'application/x-www-form-urlencoded',
-          },
-        })
-          .then(function (res) {
-
-            this.$store.dispatch('saveOppo', res.data);
+        sandBox.APIs.oppo.add({
+          data : require('qs').stringify(this.oppo),
+          success : function (data) {
+            this.$store.dispatch('saveOppo', data);
             this.$message({
               message: "添加成功",
               type: "success"
             });
-          }.bind(this));
+          }.bind(this)
+        });
 
         this.dialogFormVisible = false
       },
