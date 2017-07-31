@@ -3,6 +3,8 @@ package xin.qhongchen.crm.service;
 import org.springframework.transaction.annotation.Transactional;
 import xin.qhongchen.crm.entity.User;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Author: qhong Chen
@@ -15,4 +17,5 @@ public interface UserService {
     boolean login(User user);
     User getByUserName(String name);
     void updateUser(User user);
+    List<User> getByPower(Integer power);
 }

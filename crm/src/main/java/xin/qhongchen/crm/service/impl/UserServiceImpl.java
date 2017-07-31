@@ -6,6 +6,8 @@ import xin.qhongchen.crm.entity.User;
 import xin.qhongchen.crm.repository.UserRepository;
 import xin.qhongchen.crm.service.UserService;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Author: qhong Chen
@@ -44,5 +46,11 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User user) {
 
         userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getByPower(Integer power) {
+
+        return userRepository.findByUserPower(power);
     }
 }

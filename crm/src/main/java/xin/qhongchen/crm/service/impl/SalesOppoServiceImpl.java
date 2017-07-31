@@ -55,6 +55,8 @@ public class SalesOppoServiceImpl implements SalesOppoService {
     @Override
     public SalesOpportunity saveOppo(SalesOpportunity oppo) {
 
+        oppo.setSalesAllocationStatus(0);
+        oppo.setSalesDevelopStatus(0);
         salesOppoRepository.save(oppo);
 
         return oppo;

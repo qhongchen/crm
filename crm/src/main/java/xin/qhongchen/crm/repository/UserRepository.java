@@ -3,6 +3,8 @@ package xin.qhongchen.crm.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import xin.qhongchen.crm.entity.User;
 
+import java.util.List;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,4 +15,5 @@ import xin.qhongchen.crm.entity.User;
 public interface UserRepository extends JpaRepository<User,Integer>{
 
     User findByUserName(String userName);
+    List<User> findByUserPower(Integer power);
 }

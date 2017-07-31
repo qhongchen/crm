@@ -14,6 +14,8 @@ import xin.qhongchen.crm.service.ClientService;
 import xin.qhongchen.crm.service.SalesOppoService;
 import xin.qhongchen.crm.service.UserService;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
@@ -34,11 +36,10 @@ public class DemoApplicationTests {
     @Test
     public void contextLoads() {
 
-        User user1 = userRepository.findOne(1);
-        User user2 = userRepository.findOne(2);
 
-        user1.setUserName("hhgggg");
-        userService.updateUser(user1);
+        List<User> list  = userService.getByPower(4);
+
+        System.out.printf(userService.getByPower(4).toString());
 
     }
 

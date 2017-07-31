@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import xin.qhongchen.crm.entity.User;
 import xin.qhongchen.crm.service.UserService;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Author: qhong Chen
@@ -25,6 +27,12 @@ public class UserController {
         boolean logined = userService.login(user);
 
         return logined ? userService.getByUserName(user.getUserName()) : null;
+    }
+
+    @RequestMapping("/user/getListByPower")
+    public List<User> getUserList(Integer power){
+
+        return userService.getByPower(power);
     }
 
 }

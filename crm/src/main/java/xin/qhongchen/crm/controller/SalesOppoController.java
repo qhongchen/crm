@@ -1,6 +1,7 @@
 package xin.qhongchen.crm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xin.qhongchen.crm.entity.SalesOpportunity;
@@ -50,8 +51,6 @@ public class SalesOppoController {
     @RequestMapping("/addOppo")
     public SalesOpportunity addOppo(SalesOpportunity oppo){
 
-        oppo.setSalesAllocationStatus(7);
-        oppo.setSalesDevelopStatus(9);
         service.saveOppo(oppo);
 
         return oppo;
