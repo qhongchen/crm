@@ -112,10 +112,17 @@
               message: "添加成功",
               type: "success"
             });
+
+            this.dialogFormVisible = false
           }.bind(this)
         });
 
-        this.dialogFormVisible = false
+        console.log(this.oppo)
+        this.oppo = Object.assign({},JSON.parse(JSON.stringify(this.resetObj)));
+        console.log(this.oppo)
+        console.log(Object.assign({},JSON.parse(JSON.stringify(this.resetObj))))
+
+
       },
     }
   };

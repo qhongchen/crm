@@ -43,7 +43,7 @@
         <el-form-item align="center">
           <el-col span="3" offset="2">机会描述:</el-col>
           <el-col span="15">
-            <el-input type="textarea" :autosize="{ minRows: 2}" v-model="oppo.salesOppoDesc" disabled></el-input>
+            <el-input type="textarea" :autosize="{ minRows: 2}" v-model="oppo.salesOppoDesc" disabled ></el-input>
           </el-col>
         </el-form-item>
         <el-form-item align="center">

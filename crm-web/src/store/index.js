@@ -8,6 +8,9 @@ const state = {
   oppoList: [],
   user : null,
   id : 1,
+  initOppo : {
+
+  },
 };
 
 export default new Vuex.Store({

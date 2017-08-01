@@ -67,10 +67,8 @@
   import oppoadd from "../../components/sales/OppoAdd.vue"
   import oppoedit from "../../components/sales/OppoEdit.vue"
   import oppoallocation from "../../components/sales/OppoAllocation.vue"
-  import ElButton from "../../../node_modules/element-ui/packages/button/src/button";
   export default {
     components : {
-      ElButton,
       "oppo-add" : oppoadd,
       "oppo-edit" : oppoedit,
       "oppo-allocation" : oppoallocation,
@@ -80,7 +78,7 @@
       sandBox.APIs.oppo.list({
         success : function (data) {
           this.$store.dispatch('updateOppoList', data);
-          console.log(this.$store.state.oppoList);
+          //console.log(this.$store.state.oppoList);
         }.bind(this)
       })
     },
